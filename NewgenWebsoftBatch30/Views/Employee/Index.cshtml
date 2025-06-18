@@ -1,0 +1,58 @@
+﻿@model IEnumerable<NewgenWebsoftBatch30.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employee List";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">List of Employees</h2>
+        <a asp-action="Create" class="btn btn-success shadow">Add New Employee</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.EmpFirstName)</th>
+                    <th>@Html.DisplayNameFor(model => model.EmpLastName)</th>
+                    <th>@Html.DisplayNameFor(model => model.EmailId)</th>
+                    <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.EmpGender)</th>
+                    <th>@Html.DisplayNameFor(model => model.EmpPhoneNumber)</th>
+                    <th>@Html.DisplayNameFor(model => model.Salary)</th>
+                    <th>@Html.DisplayNameFor(model => model.EmpStatus)</th>
+                    <th>@Html.DisplayNameFor(model => model.Department)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.EmpFirstName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EmpLastName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EmailId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.BirthDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EmpGender)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EmpPhoneNumber)</td>
+                        <td>₹@item.Salary.ToString("N2")</td>
+                        <td>
+                            <span class="badge @(item.EmpStatus ? "bg-success" : "bg-secondary")">
+                                @(item.EmpStatus ? "Active" : "Inactive")
+                            </span>
+                        </td>
+                        <td>@item.Department?.DeptName</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-action="Edit" asp-route-id="@item.EmpId" class="btn btn-sm btn-warning">✏️ Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.EmpId" class="btn btn-sm btn-info">🔍 Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.EmpId" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this employee?')">🗑️ Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

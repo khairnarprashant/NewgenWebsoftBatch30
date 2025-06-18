@@ -1,0 +1,102 @@
+﻿@model NewgenWebsoftBatch30.Models.Employee
+
+@{
+    ViewData["Title"] = "Create Employee";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow border-0 rounded-4">
+                <div class="card-header bg-dark text-white rounded-top-4">
+                    <h4 class="mb-0">Create New Employee</h4>
+                </div>
+                <div class="card-body px-4 py-5">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="EmpFirstName" class="form-label fw-semibold"></label>
+                                <input asp-for="EmpFirstName" class="form-control" />
+                                <span asp-validation-for="EmpFirstName" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="EmpLastName" class="form-label fw-semibold"></label>
+                                <input asp-for="EmpLastName" class="form-control" />
+                                <span asp-validation-for="EmpLastName" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="EmailId" class="form-label fw-semibold"></label>
+                            <input asp-for="EmailId" class="form-control" />
+                            <span asp-validation-for="EmailId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="BirthDate" class="form-label fw-semibold"></label>
+                                <input asp-for="BirthDate" type="date" class="form-control" />
+                                <span asp-validation-for="BirthDate" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold d-block">Gender</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="EmpGender" value="Male" />
+                                    <label class="form-check-label">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="EmpGender" value="Female" />
+                                    <label class="form-check-label">Female</label>
+                                </div>
+                                <span asp-validation-for="EmpGender" class="text-danger small d-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="EmpPhoneNumber" class="form-label fw-semibold"></label>
+                                <input asp-for="EmpPhoneNumber" class="form-control" />
+                                <span asp-validation-for="EmpPhoneNumber" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Salary" class="form-label fw-semibold"></label>
+                                <input asp-for="Salary" class="form-control" />
+                                <span asp-validation-for="Salary" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" asp-for="EmpStatus" />
+                            <label class="form-check-label" asp-for="EmpStatus"></label>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="DeptId" class="form-label fw-semibold">Department</label>
+                            <select asp-for="DeptId" class="form-select">
+                                <option value="">-- Select Department --</option>
+                                @foreach (var item in ViewBag.Departments)
+                                {
+                                    <option value="@item.DeptId">@item.DeptName</option>
+                                }
+                            </select>
+                            <span asp-validation-for="DeptId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success px-4">Create</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">← Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
